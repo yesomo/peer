@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Yesomo - 信息索引平台",
-  description: "人人各得其所欲",
+  description: "链接",
 };
 import "./globals.css";
 import { Header } from "./header";

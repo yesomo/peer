@@ -33,7 +33,7 @@ export function Header() {
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <Link href="/public" legacyBehavior passHref>
+                        <Link href="/" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                 <img className="h-8 w-auto" src="/yesomo.svg" alt="Yesomo" />
                                 {/* <span className="pl-2">Yesomo</span> */}
