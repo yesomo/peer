@@ -1,6 +1,5 @@
 import React from "react"
 import InfoList from "./list";
-import { infoApi } from "@/app/info/action";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import Link from "next/link";
 import InfoStatsPie from "./stats-pie";
@@ -15,12 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { getEntityStats, getPublisherMap } from "./action";
 
 export default async function Info() {
-  const publishers = await infoApi.getPublisherMap();
-  const entityStats = await infoApi.getEntityStats(168);
-  const categoryStats = await infoApi.getCategoryStats(168);
-  const topicStats = await infoApi.getTopicStats(168);
+  const publishers = await getPublisherMap();
+  const entityStats = await getEntityStats(168);
+
   return (
     <main className="flex min-h-screen flex-col p-2">
       <div  className="flex w-full">

@@ -1,5 +1,5 @@
 "use client"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
     Select,
     SelectContent,
@@ -10,8 +10,8 @@ import {
 import React from "react"
 import { DataTable } from "./table"
 import { getColumns } from "./column"
-import { infoApi } from "@/app/info/action"
 import { Button } from "@/components/ui/button"
+import { getLatestInfo } from "./action"
 
 
 export default function InfoList({ query, publishers }: { query: { param: string, value: string }|null, publishers: Map<string,string> }) {
@@ -33,9 +33,9 @@ export default function InfoList({ query, publishers }: { query: { param: string
   
     React.useEffect(() => {
         async function fetchInfo() {
-            let info = await infoApi.getLatestInfo(hour);
+            let info = await getLatestInfo(hour);
+            console.log(info)
             setData(info);
-            // console.log(data)
         }
         fetchInfo()
     }, [hour]);

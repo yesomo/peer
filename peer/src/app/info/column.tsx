@@ -20,18 +20,16 @@ export type Info = {
     id: number,
     title: string,
     url: string,
-    category: string,
+    // category: string,
     // labels: [],
-    entities: [Entity],
-    keywords: [],
-    mediumn: string,
+    labels: [NameEntity],
     language: string,
-    content: string,
+    data: string,
     publisher: Publisher,
     collect_time: number,
-    process_time: number,
+    publish_time: number,
 }
-export type Entity = {
+export type NameEntity = {
     name: string,
     label: string,
     timestamp: number,
@@ -70,27 +68,27 @@ export const getColumns = (publishers:Map<String,String>) => {
                 }
             },
         },
+        // {
+        //     accessorKey: "category",
+        //     header: "类型",
+        //     cell: ({ row }) => {
+        //         const category = row.getValue("category") as string
+        //         return <div className="font-medium">{category}</div>
+        //     },
+        // },
+        // {
+        //     accessorKey: "topic",
+        //     header: "主题",
+        //     cell: ({ row }) => {
+        //         const topic = row.getValue("topic") as string
+        //         return <div className="font-medium">{topic}</div>
+        //     },
+        // },
         {
-            accessorKey: "category",
-            header: "类型",
-            cell: ({ row }) => {
-                const category = row.getValue("category") as string
-                return <div className="font-medium">{category}</div>
-            },
-        },
-        {
-            accessorKey: "topic",
-            header: "主题",
-            cell: ({ row }) => {
-                const topic = row.getValue("topic") as string
-                return <div className="font-medium">{topic}</div>
-            },
-        },
-        {
-            accessorKey: "entities",
+            accessorKey: "labels",
             header: "命名实体",
             cell: ({ row }) => {
-                const nes = row.getValue("entities") as [Entity]
+                const nes = row.getValue("labels") as [NameEntity]
                 let per = []
                 let loc = []
                 let org = []
@@ -119,14 +117,6 @@ export const getColumns = (publishers:Map<String,String>) => {
             },
         },
         {
-            accessorKey: "keywords",
-            header: "关键字",
-            cell: ({ row }) => {
-                const keywords = row.getValue("keywords") as []
-                return <div className="font-medium">{keywords.join(";")}</div>
-            },
-        },
-        {
             accessorKey: "publisher",
             header: "发布网站",
             cell: ({ row }) => {
@@ -151,7 +141,17 @@ export const getColumns = (publishers:Map<String,String>) => {
             header: () => <div className="text-right">采集时间</div>,
             cell: ({ row }) => {
                 const collect_time = parseInt(row.getValue("collect_time"))
-                const timestr = new Date(collect_time).toLocaleString('zh-cn', { timeZone: 'UTC' })
+                const timestr = new Date(collect_time).toLocaleString('zh-cn')
+
+                return <div className="text-right font-medium">{timestr}</div>
+            },
+        },
+        {
+            accessorKey: "publish_time",
+            header: () => <div className="text-right">采集时间</div>,
+            cell: ({ row }) => {
+                const publish_time = parseInt(row.getValue("publish_time"))
+                const timestr = new Date(publish_time).toLocaleString('zh-cn')
 
                 return <div className="text-right font-medium">{timestr}</div>
             },
