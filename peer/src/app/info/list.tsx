@@ -42,7 +42,7 @@ export default function InfoList({ query, publishers }: { query: { param: string
     
     return (
         <div className="flex flex-col pl-6 pt-10 ">
-            <div className="flex  w-full">
+            <div className="flex w-full">
                 <Tabs defaultValue="latest" className="w-full" >
                     <TabsList>
                         <TabsTrigger value="latest" onClick={e => { setMode('latest') }}>最新</TabsTrigger>
