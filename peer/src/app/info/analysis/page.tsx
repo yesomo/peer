@@ -3,7 +3,7 @@
 import { getEntityStats, getInfo, getPublisherMap, getRelatedInfo } from "../action";
 import { getColumns } from "../column";
 
-export default async function InfoAnalysisPage({searchParams}:{searchParams:{url:string}}) {
+export default async function InfoAnalysisPage({ searchParams }: { searchParams: { url: string } }) {
   const url = searchParams.url;
   const publishers = await getPublisherMap();
   const entityStats = await getEntityStats(168);

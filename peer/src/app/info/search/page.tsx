@@ -1,25 +1,25 @@
 "use client"
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import React from "react";
 
 export default function InfoSearchPage() {
-  const [mode, setMode] = React.useState<string>('')
-  const [hour, setHour] = React.useState<number>(24)
-  const [publisher, setPublisher] = React.useState<string>('')
+    const [mode, setMode] = React.useState<string>('')
+    const [hour, setHour] = React.useState<number>(24)
+    const [publisher, setPublisher] = React.useState<string>('')
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-           <div className="flex w-full">
+    return (
+        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+            <div className="flex w-full">
                 <Tabs defaultValue="latest" className="w-full" >
                     <TabsList>
                         <TabsTrigger value="latest" onClick={e => { setMode('latest') }}>最新</TabsTrigger>
@@ -45,8 +45,8 @@ export default function InfoSearchPage() {
 
 
             <div className="flex pt-2 w-full">
-                
+
             </div>
-    </main>
-  );
+        </main>
+    );
 }

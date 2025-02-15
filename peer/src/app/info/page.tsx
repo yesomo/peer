@@ -20,7 +20,7 @@ export default async function Info() {
 
   return (
     <main className="flex min-h-screen flex-col p-2">
-      <div  className="flex justify-between w-full">
+      <div className="flex justify-between w-full">
         <ToggleGroup type="single" className="pl-6" defaultValue="all">
           <ToggleGroupItem value="all"><Link href="/info" >全部</Link></ToggleGroupItem>
           <ToggleGroupItem value="news"><Link href="/info/news" >新闻</Link></ToggleGroupItem>
@@ -30,11 +30,11 @@ export default async function Info() {
             <SelectValue placeholder="时间段(最近24h)" />
           </SelectTrigger>
           <SelectContent>
-              <SelectItem value="1h">最近</SelectItem>
-              <SelectItem value="1h">最近1h</SelectItem>
-              <SelectItem value="6h">最近6h</SelectItem>
-              <SelectItem value="24h">最近24h</SelectItem>
-              <SelectItem value="7d">最近7d</SelectItem>
+            <SelectItem value="1h">最近</SelectItem>
+            <SelectItem value="1h">最近1h</SelectItem>
+            <SelectItem value="6h">最近6h</SelectItem>
+            <SelectItem value="24h">最近24h</SelectItem>
+            <SelectItem value="7d">最近7d</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -44,7 +44,7 @@ export default async function Info() {
         <InfoStatsPie stats={entityStats[1]} description={"24h内消息地区排名top10"} title={"地区top10"}></InfoStatsPie>
       </div>
       <div>
-      <InfoList publishers={publishers} query={{"param":"category","value":""}}></InfoList>
+        <InfoList publishers={publishers} query={{ "param": "category", "value": "" }}></InfoList>
       </div>
     </main>
 

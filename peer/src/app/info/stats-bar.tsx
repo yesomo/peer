@@ -17,26 +17,26 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042',"hsl(var(--chart-1))","hsl(var(--chart-2))","hsl(var(--chart-3))","hsl(var(--chart-4))","hsl(var(--chart-5))"];
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))"];
 
-function getChartData(stat:Map<String,number>){
+function getChartData(stat: Map<String, number>) {
   console.log(stat)
   let chartData = {
-    "data":[],
-    "config":{},
+    "data": [],
+    "config": {},
   }
 
   let ci = 0;
-  for(let i in stat){
-    chartData["data"].push({"value":i,"count":stat[i],fill:COLORS[ci++]})
-    chartData["config"][i] = {"label":i}
-  
+  for (let i in stat) {
+    chartData["data"].push({ "value": i, "count": stat[i], fill: COLORS[ci++] })
+    chartData["config"][i] = { "label": i }
+
   }
   // console.log(JSON.stringify(chartData));
   return chartData;
 }
 
-export function InfoStatsBar({ stats,title,description }: { stats: any,title:string,description:string }) {
+export function InfoStatsBar({ stats, title, description }: { stats: any, title: string, description: string }) {
   const barData = getChartData(stats)
   const chartConfig = barData["config"];
   const chartData = barData["data"];
