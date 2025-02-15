@@ -14,32 +14,29 @@ import { Button } from "@/components/ui/button"
 import { getLatestInfo } from "./action"
 
 
-export default function InfoList({ query, publishers }: { query: { param: string, value: string }|null, publishers: Map<string,string> }) {
-    const [category, setCategory] = React.useState<string>('')
+export default function InfoList({ query, publishers }: { query: { param: string, value: string } | null, publishers: Map<string, string> }) {
     const [mode, setMode] = React.useState<string>('')
     const [hour, setHour] = React.useState<number>(24)
     const [publisher, setPublisher] = React.useState<string>('')
     const [data, setData] = React.useState<[]>([])
     const columns = getColumns(publishers);
 
-    // console.log(typeof publishers);
-    // console.log(JSON.stringify(publishers));
-    let selection =[];
-    for(let domain in publishers){
+    let selection = [];
+    for (let domain in publishers) {
         const name = publishers[domain] as string;
         selection.push(<SelectItem key={domain} value={name}>{name}</SelectItem>)
         // return <SelectItem key={domain} value={name}>{name}</SelectItem>;
     };
-  
+
     React.useEffect(() => {
         async function fetchInfo() {
-            let info = await getLatestInfo(hour);
+            let info = await getLatestInfo({});
             console.log(info)
             setData(info);
         }
         fetchInfo()
     }, [hour]);
-    
+
     return (
         <div className="flex flex-col pl-6 pt-10 ">
             <div className="flex w-full">
@@ -58,7 +55,7 @@ export default function InfoList({ query, publishers }: { query: { param: string
                     </TabsList>
                 </Tabs> */}
 
-                <div  className="w-full">
+                <div className="w-full">
                     <Select onValueChange={(domain) => setPublisher(domain)}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="所有网站" />
@@ -67,23 +64,15 @@ export default function InfoList({ query, publishers }: { query: { param: string
                             <SelectItem value="所有网站">{"所有网站"}</SelectItem>
                             {
                                 selection
-                                // ()=>{
-                                //     let selection = []
-                                //     for(let domain in publishers){
-                                //         const name = publishers.get(domain) as string;
-                                //         selection.push( <SelectItem key={domain} value={name}>{name}</SelectItem>);
-                                //     };
-                                //     return selection;
-                                // }()
                             }
                         </SelectContent>
                     </Select>
                 </div>
-                <Button>查看全部</Button>
+                <Button onClick={() => { window.open(`/info/search`, "_blank") }}>查看全部</Button>
             </div>
 
-   
-            <div  className="flex pt-2 w-full">
+
+            <div className="flex pt-2 w-full">
                 <DataTable columns={columns} data={data}></DataTable>
             </div>
         </div>

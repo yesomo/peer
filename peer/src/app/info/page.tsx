@@ -3,8 +3,6 @@ import InfoList from "./list";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import Link from "next/link";
 import InfoStatsPie from "./stats-pie";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { InfoStatsBar } from "./stats-bar";
 import {
   Select,
   SelectContent,
@@ -26,14 +24,13 @@ export default async function Info() {
         <ToggleGroup type="single" className="pl-6" defaultValue="all">
           <ToggleGroupItem value="all"><Link href="/info" >全部</Link></ToggleGroupItem>
           <ToggleGroupItem value="news"><Link href="/info/news" >新闻</Link></ToggleGroupItem>
-          {/* <ToggleGroupItem value="view"><Link href="/info/views" >观点</Link></ToggleGroupItem>
-          <ToggleGroupItem value="skill"><Link href="/info/skill" >技术</Link></ToggleGroupItem> */}
         </ToggleGroup>
         <Select>
           <SelectTrigger className="w-[180px] flex right-5">
             <SelectValue placeholder="时间段(最近24h)" />
           </SelectTrigger>
           <SelectContent>
+              <SelectItem value="1h">最近</SelectItem>
               <SelectItem value="1h">最近1h</SelectItem>
               <SelectItem value="6h">最近6h</SelectItem>
               <SelectItem value="24h">最近24h</SelectItem>

@@ -5,43 +5,11 @@ import {
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
 import { Button } from "@/components/ui/button"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { MoreHorizontal } from "lucide-react"
-import Link from "next/link"
+import { Info, NameEntity, Publisher } from "./model";
 
-export type Info = {
-    id: number,
-    title: string,
-    url: string,
-    // category: string,
-    // labels: [],
-    labels: [NameEntity],
-    language: string,
-    data: string,
-    publisher: Publisher,
-    collect_time: number,
-    publish_time: number,
-}
-export type NameEntity = {
-    name: string,
-    label: string,
-    timestamp: number,
-}
 
-export type Publisher = {
-    name: string,
-    domain: string,
-    timestamp: number,
-}
 
-export const getColumns = (publishers:Map<String,String>) => {
+export const getColumns = (publishers: Map<String, String>) => {
     const columns: ColumnDef<Info>[] = [
         {
             accessorKey: "title",
@@ -56,7 +24,7 @@ export const getColumns = (publishers:Map<String,String>) => {
                     return (
                         <HoverCard >
                             <HoverCardTrigger>
-                                <Button className="pl-0" variant="link" onClick={()=>window.open(url,"_blank")}> {content_part}</Button>
+                                <Button className="pl-0" variant="link" onClick={() => window.open(url, "_blank")}> {content_part}</Button>
                             </HoverCardTrigger>
                             <HoverCardContent >
                                 {title}
@@ -64,26 +32,10 @@ export const getColumns = (publishers:Map<String,String>) => {
                         </HoverCard>
                     )
                 } else {
-                    return <Button  className="pl-0"  variant="link" onClick={()=>window.open(url,"_blank")}> {title}</Button>
+                    return <Button className="pl-0" variant="link" onClick={() => window.open(url, "_blank")}> {title}</Button>
                 }
             },
         },
-        // {
-        //     accessorKey: "category",
-        //     header: "类型",
-        //     cell: ({ row }) => {
-        //         const category = row.getValue("category") as string
-        //         return <div className="font-medium">{category}</div>
-        //     },
-        // },
-        // {
-        //     accessorKey: "topic",
-        //     header: "主题",
-        //     cell: ({ row }) => {
-        //         const topic = row.getValue("topic") as string
-        //         return <div className="font-medium">{topic}</div>
-        //     },
-        // },
         {
             accessorKey: "labels",
             header: "命名实体",
@@ -120,18 +72,19 @@ export const getColumns = (publishers:Map<String,String>) => {
             accessorKey: "publisher",
             header: "发布网站",
             cell: ({ row }) => {
-                const publisher =row.getValue("publisher") as Publisher;
+                const publisher = row.getValue("publisher") as Publisher;
                 const domain = publisher.domain;
                 const name = publishers[domain] ?? domain;
+
                 return (
                     <HoverCard >
-                    <HoverCardTrigger>
-                        <Button className="pl-0" variant="link"  onClick={() => window.open(`${name}`, "_blank")}> {name}</Button>
-                    </HoverCardTrigger>
-                    <HoverCardContent >
-                        {domain}
-                    </HoverCardContent>
-                </HoverCard>
+                        <HoverCardTrigger>
+                            <Button className="pl-0" variant="link" onClick={() => window.open(`${name}`, "_blank")}> {name}</Button>
+                        </HoverCardTrigger>
+                        <HoverCardContent >
+                            {domain}
+                        </HoverCardContent>
+                    </HoverCard>
                 )
 
             },
@@ -148,7 +101,7 @@ export const getColumns = (publishers:Map<String,String>) => {
         },
         {
             accessorKey: "publish_time",
-            header: () => <div className="text-right">采集时间</div>,
+            header: () => <div className="text-right">发布时间</div>,
             cell: ({ row }) => {
                 const publish_time = parseInt(row.getValue("publish_time"))
                 const timestr = new Date(publish_time).toLocaleString('zh-cn')
@@ -160,7 +113,8 @@ export const getColumns = (publishers:Map<String,String>) => {
             id: "actions",
             header: "详情",
             cell: ({ row }) => {
-                return <Button  className="pl-0"  variant="link" onClick={()=>window.open("#","_blank")}> {"分析"}</Button>
+                const url = row.original.url as string
+                return <Button className="pl-0" variant="link" onClick={() => window.open(`/info/analysis?url=${url}`, "_blank")}> {"分析"}</Button>
             },
         },
     ];
