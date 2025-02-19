@@ -9,7 +9,7 @@ import { Info, NameEntity, Publisher } from "./model";
 
 
 
-export const getColumns = (publishers: Map<String, String>) => {
+export const getColumns = () => {
     const columns: ColumnDef<Info>[] = [
         {
             accessorKey: "title",
@@ -46,7 +46,7 @@ export const getColumns = (publishers: Map<String, String>) => {
                 let org = []
                 for (let i in nes) {
                     let entity = nes[i]
-                    console.log(entity)
+                    // console.log(entity)
                     switch (entity.label) {
                         case "LOC":
                             loc.push(entity.name)
@@ -73,8 +73,9 @@ export const getColumns = (publishers: Map<String, String>) => {
             header: "发布网站",
             cell: ({ row }) => {
                 const publisher = row.getValue("publisher") as Publisher;
+                console.log(publisher)
                 const domain = publisher.domain;
-                const name = publishers[domain] ?? domain;
+                const name = publisher.name;
 
                 return (
                     <HoverCard >

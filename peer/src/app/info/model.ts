@@ -4,7 +4,7 @@ export type Info = {
     url: string,
     // category: string,
     // labels: [],
-    labels: [NameEntity],
+    labels: NameEntity[],
     language: string,
     data: string,
     publisher: Publisher,

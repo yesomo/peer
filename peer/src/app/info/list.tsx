@@ -19,14 +19,14 @@ export default function InfoList({ query, publishers }: { query: { param: string
     const [hour, setHour] = React.useState<number>(24)
     const [publisher, setPublisher] = React.useState<string>('')
     const [data, setData] = React.useState<[]>([])
-    const columns = getColumns(publishers);
+    const columns = getColumns();
 
-    let selection = [];
-    for (let domain in publishers) {
-        const name = publishers[domain] as string;
-        selection.push(<SelectItem key={domain} value={name}>{name}</SelectItem>)
-        // return <SelectItem key={domain} value={name}>{name}</SelectItem>;
-    };
+    // let selection = [];
+    // for (let domain in publishers) {
+    //     const name = publishers[domain] as string;
+    //     selection.push(<SelectItem key={domain} value={name}>{name}</SelectItem>)
+    //     // return <SelectItem key={domain} value={name}>{name}</SelectItem>;
+    // };
 
     React.useEffect(() => {
         async function fetchInfo() {
@@ -55,7 +55,7 @@ export default function InfoList({ query, publishers }: { query: { param: string
                     </TabsList>
                 </Tabs> */}
 
-                <div className="w-full">
+                {/* <div className="w-full">
                     <Select onValueChange={(domain) => setPublisher(domain)}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="所有网站" />
@@ -67,7 +67,7 @@ export default function InfoList({ query, publishers }: { query: { param: string
                             }
                         </SelectContent>
                     </Select>
-                </div>
+                </div> */}
                 <Button onClick={() => { window.open(`/info/search`, "_blank") }}>查看全部</Button>
             </div>
 

@@ -1,14 +1,32 @@
 "use client"
 
-import { getColumns } from "../column";
 import { Info } from "../model";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { DataTable } from "../table";
+import { getColumns } from "../column";
+import InfoGraph from "./graph";
+import KnowledgeGraph from "./graph";
 
-export default function InfoAnalysisView({ info, analysis }: { info: Info, analysis: [Info] }) {
 
+export default function InfoAnalysisView({ info, analysis }: { info: Info, analysis: Info[] }) {
+  const columns = getColumns();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <DataTable columns={columns} data={info}></DataTable>
-    </main>
+    <div className="flex flex-col w-full pt-4 ">
+      <Tabs defaultValue="list" className="w-full">
+      <div className="flex bg-slate-300 w-full">关联分析</div>
+        <TabsList>
+          <TabsTrigger value="list">列表形式</TabsTrigger>
+          <TabsTrigger value="graph">图表形式</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="list">
+          <DataTable columns={columns} data={analysis}></DataTable>
+        </TabsContent>
+        <TabsContent value="graph">
+          <KnowledgeGraph></KnowledgeGraph>
+        </TabsContent>
+      </Tabs>
+    </div>
+
   );
 }

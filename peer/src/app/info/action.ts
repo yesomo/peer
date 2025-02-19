@@ -8,7 +8,7 @@ export type QueryParams = {
   page_size_offset: [number, number],
 }
 
-export async function getLatestInfo(params: QueryParams) {
+export async function getLatestInfo(params: QueryParams|{}) {
   // let params = null
   // { method: "POST", headers: { "content-type": "application/json" } , body: JSON.stringify(params)}
   // const res = await fetch(`${INFO_API_URI}`, { method: "POST", headers: { "content-type": "application/json" } , body: JSON.stringify({})});
