@@ -9,6 +9,7 @@ import KnowledgeGraph from "./graph";
 
 
 export default function InfoAnalysisView({ info, analysis }: { info: Info, analysis: Info[] }) {
+  console.log(analysis)
   const columns = getColumns();
   return (
     <div className="flex flex-col w-full pt-4 ">

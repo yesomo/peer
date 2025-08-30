@@ -13,7 +13,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { queryInfo, QueryParam } from "@/app/info/action";
+import { getLatestInfo, QueryParams } from "@/app/info/action";
 
 
 
@@ -92,16 +92,13 @@ export default function InfoToolbar<TData>({
             <div className="flex items-center py-4 ml-4">
                 <Button onClick={
                     async () => {
-                        const param: QueryParam = {
-                            domain: domain,
-                            start_time: (date?.from?.getTime() ?? 0) - 60 * 60 * 24 * 1000,
-                            end_time: date?.to?.getTime() ?? new Date().getTime(),
-                            category: null,
-                            labels: [],
-                            nes: [],
-                            keywords: [],
+                        const param: QueryParams = {
+                            publisher_domain: domain,
+                            timestamp_from_to: [(date?.from?.getTime() ?? 0) - 60 * 60 * 24 * 1000, date?.to?.getTime() ?? new Date().getTime()],
+                            entity_label_name: null,
+                            page_size_offset: null
                         }
-                        const info = await queryInfo(param);
+                        const info = await getLatestInfo(param);
                         console.log(info)
                         dispatch("updateInfo", info);
                     }

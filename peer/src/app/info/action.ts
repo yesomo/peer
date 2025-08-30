@@ -4,8 +4,8 @@ import { INFO_API_URI } from '@/app/env'
 export type QueryParams = {
   timestamp_from_to: [number, number],
   publisher_domain: string | null,
-  entity_label_name: [String, String],
-  page_size_offset: [number, number],
+  entity_label_name: [String, String]| null,
+  page_size_offset: [number, number]| null,
 }
 
 export async function getLatestInfo(params: QueryParams|{}) {
